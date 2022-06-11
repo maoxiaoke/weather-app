@@ -5,7 +5,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '57.5': "14.375rem",
+      },
+      height: {
+        '61.75': "15.4375rem"
+      },
+      borderRadius: {
+        'card': "30px",
+        'button': "18px"
+      }
+    },
   },
   plugins: [],
 }
