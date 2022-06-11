@@ -53,9 +53,12 @@ const MeteorologyList = ({ type = 'vertical', list }: MeteorologyListProps) => {
     <ul className="flex justify-between">
       {
         list.map((item, index) => (
-          <li key={index} className={`rounded-[20px] bg-${item.indicator}-rgba flex items-center py-[5px] px-[15px]`} >
+          <li key={index}
+            className={`rounded-[20px] flex items-center py-[5px] px-[15px]
+            ${item.indicator === 'precipitation' ? 'bg-precipitation-rgba' : (item.indicator === 'humidity' ? 'bg-humidity-rgba' : 'bg-windSpeed-rgba')}`}
+            >
             <Image src={indicatorMap.get(item.indicator)!.icon} alt={item.indicator} width="24" height="24" />
-            <span className={`text-${item.indicator}`}>{item.value}</span>
+            <span className={`${item.indicator === 'precipitation' ? 'text-precipitation' : (item.indicator === 'humidity' ? 'text-humidity' : 'text-windSpeed')}`}>{item.value}</span>
           </li>
         ))
       }
