@@ -20,7 +20,7 @@ const Temperature = ({ celsius, type, showDay = false }: TemperatureProps) => {
 
   return (<div>
     <div className="flex">
-      <span className={`${celsiusFontSize} text-bold leading-none`}>{celsius}</span>
+      <span className={`${celsiusFontSize} font-bold leading-none`}>{celsius}</span>
       <span className="text-sm text-[#332821]">°C</span>
     </div>
     <div className="text-sm text-[#332821] opacity-50">
