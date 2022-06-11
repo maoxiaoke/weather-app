@@ -15,7 +15,12 @@ module.exports = {
       borderRadius: {
         'card': "30px",
         'button': "18px"
-      }
+      },
+      colors: {
+        'precipitation': '#658ED9',
+        'humidity': '#D86191',
+        'windSpeed': '#5E4FC1',
+      },
     },
   },
   plugins: [],

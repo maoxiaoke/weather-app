@@ -9,7 +9,7 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Home</title>
-        <meta name="description" content="Weather app homepage" />
+        <meta name="description" content="Today Page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

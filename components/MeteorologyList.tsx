@@ -10,20 +10,20 @@ export interface MeteorologyListProps {
 }
 
 const indicatorMap = new Map([
-  ['humidity', {
-    cn: '湿度',
-    icon: '/assets/humidity.png'
-  }],
   [
     'precipitation', {
       cn: '降水量',
-      icon: '/assets/precipitation.png'
+      icon: '/assets/precipitation.png',
     }
   ],
+  ['humidity', {
+    cn: '湿度',
+    icon: '/assets/humidity.png',
+  }],
   [
     'windSpeed', {
       cn: '风速',
-      icon: '/assets/windSpeed.png'
+      icon: '/assets/windSpeed.png',
     }
   ]
 ])
@@ -50,7 +50,16 @@ const MeteorologyList = ({ type = 'vertical', list }: MeteorologyListProps) => {
   }
 
   return (
-    <div>fsf</div>
+    <ul className="flex justify-between">
+      {
+        list.map((item, index) => (
+          <li key={index} className={`rounded-[20px] bg-windSpeed flex items-center py-[5px] px-[15px] opacity-10`} >
+            <Image src={indicatorMap.get(item.indicator)!.icon} alt={item.indicator} width="24" height="24" />
+            <span className="text-[#5E4FC1]">{item.value}</span>
+          </li>
+        ))
+      }
+    </ul>
   )
 }
 

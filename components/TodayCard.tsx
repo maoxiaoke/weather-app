@@ -16,12 +16,15 @@ const TodayCard = () => {
         <Temperature celsius="15" type="sm" />
       </div>
 
-      <div
-        className={`absolute bottom-0 left-1/2 h-[47px] w-[163px] -translate-x-1/2 translate-y-1/2
-        flex justify-center items-center rounded-button bg-[#5E4FC1] text-white text-bold text-sm`}
-      >
-        <Link href="/detail">详情</Link>
-      </div>
+      <Link href="/forecast">
+        <div
+          className={`absolute bottom-0 left-1/2 h-[47px] w-[163px] -translate-x-1/2 translate-y-1/2
+          flex justify-center items-center rounded-button bg-[#5E4FC1] text-white text-bold text-sm`}
+        >
+        详情
+        </div>
+      </Link>
+
 
       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-[50px] text-white text-lg">
         <MeteorologyList
