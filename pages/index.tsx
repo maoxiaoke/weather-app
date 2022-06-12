@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import TodayCard from '../components/TodayCard';
@@ -7,7 +6,7 @@ import TodayCard from '../components/TodayCard';
 import { getCityName } from '../service/getCityName';
 import { getNowWeather } from '../service/getNowWeather';
 
-import type { GetServerSideProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import type { CityInfo } from '../service/getCityName';
 import type { RealtimeWeather } from '../service/getNowWeather';
 
@@ -41,8 +40,9 @@ const Home: NextPage<{
   cityInfo: CityInfo,
   realtimeWeather: RealtimeWeather
 }> = (props) => {
-  const router = useRouter()
+  const router = useRouter();
   const [error, setError] = useState<Error | null>(null);
+
   useEffect(() => {
     const fetchGeoLocation = async () => {
       try {

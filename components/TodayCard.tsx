@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Temperature from './Temperature';
 import MeteorologyList from '../components/MeteorologyList';
 
@@ -7,9 +8,11 @@ import type { CityInfo } from '../service/getCityName';
 import type { RealtimeWeather } from '../service/getNowWeather';
 
 const TodayCard = ({cityInfo, realtimeWeather } : {
-  cityInfo: CityInfo,
-  realtimeWeather: RealtimeWeather
+  cityInfo: CityInfo;
+  realtimeWeather: RealtimeWeather;
 }) => {
+
+  const { lat = 30.25, log = 120.1552 } = useRouter()?.query || {};
 
   return (
     <div className="bg-white w-57.5 h-61.75 rounded-card relative">
@@ -23,7 +26,7 @@ const TodayCard = ({cityInfo, realtimeWeather } : {
         <Temperature celsius={realtimeWeather.temp} type="sm" />
       </div>
 
-      <Link href="/forecast">
+      <Link href={`/forecast?lat=${lat}&log=${log}`}>
         <div
           className={`absolute bottom-0 left-1/2 h-[47px] w-[163px] -translate-x-1/2 translate-y-1/2
           flex justify-center items-center rounded-button bg-[#5E4FC1] text-white text-bold text-sm`}
@@ -43,4 +46,3 @@ const TodayCard = ({cityInfo, realtimeWeather } : {
 }
 
 export default TodayCard;
-

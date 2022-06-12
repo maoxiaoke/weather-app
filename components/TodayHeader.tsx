@@ -3,7 +3,11 @@ import Link from 'next/link';
 import Temperature from './Temperature';
 import MeteorologyList from './MeteorologyList';
 
-const TodayHeader = () => {
+import type { CityInfo } from '../service/getCityName';
+
+const TodayHeader = ({ cityInfo }: {
+  cityInfo: CityInfo
+}) => {
   return (
     <>
       <div className="flex pl-[22px] pr-[16px] w-full justify-between">
@@ -12,8 +16,8 @@ const TodayHeader = () => {
             <Image src="/assets/left-arrow.png" width="20" height="17" alt="left arrow" />
           </Link>
 
-          <p className="font-bold text-3xl mt-[44px]">杭州市，</p>
-          <p className="font-bold text-3xl">浙江省</p>
+          <p className="font-bold text-3xl mt-[44px]">{cityInfo.city}，</p>
+          <p className="font-bold text-3xl">{cityInfo.province}</p>
 
           <Temperature type="lg" celsius="15" />
         </div>
