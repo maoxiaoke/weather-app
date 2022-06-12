@@ -1,5 +1,15 @@
 import Canvas from '@antv/f2-react';
-import { Chart, Interval } from '@antv/f2';
+
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Line,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip
+} from "recharts";
 
 import Temperature from '../components/Temperature';
 export interface HourlyTabsProps {
@@ -10,11 +20,12 @@ export interface HourlyTabsProps {
 }
 
 const data = [
-  { genre: 'Sports', sold: 275 },
-  { genre: 'Strategy', sold: 115 },
-  { genre: 'Action', sold: 120 },
-  { genre: 'Shooter', sold: 350 },
-  { genre: 'Other', sold: 150 },
+  { time: '10 am', sold: 80 },
+  { time: '11 am', sold: 115 },
+  { time: '12 am', sold: 120 },
+  { time: '1 pm', sold: 200 },
+  { time: '2 pm', sold: 150 },
+  { time: '3 pm', sold: 40 },
 ];
 
 const HourlyTabs = ({ forcasts }: HourlyTabsProps) => {
@@ -22,11 +33,10 @@ const HourlyTabs = ({ forcasts }: HourlyTabsProps) => {
     <div>
       <p className="ml-[20px] mt-[20px] ext-lg font-bold">Today</p>
 
-      <Canvas>
-        <Chart data={data}>
-          <Interval x="genre" y="sold" />
-        </Chart>
-      </Canvas>
+        <AreaChart width={375} height={87} data={data} margin={{ left: 0 }}>
+          <Tooltip />
+          <Area type="monotone" dataKey="sold" stroke="#E9C939" strokeWidth={2} fill="#E9C939" style={{ opacity: '0.25' }} />
+        </AreaChart>
 
       <ul className="flex h-[160px] w-full overflow-x-scroll mt-[11px]">
         {
