@@ -1,13 +1,18 @@
 export interface TemperatureProps {
   celsius: string;
-  type?: 'sm' | 'md' | 'lg';
+  type?: 'xm' | 'sm' | 'md' | 'lg';
   showDay?: boolean;
+  showTime?: boolean;
+  style?: React.CSSProperties;
 }
 
-const Temperature = ({ celsius, type, showDay = false }: TemperatureProps) => {
+const Temperature = ({ celsius, type, showDay = false, showTime = true, style }: TemperatureProps) => {
   let celsiusFontSize = 'text-[36px]';
 
   switch (type) {
+    case 'xm':
+      celsiusFontSize = 'text-[18px]'
+      break;
     case 'md':
         celsiusFontSize = 'text-[64px]'
       break;
@@ -19,18 +24,19 @@ const Temperature = ({ celsius, type, showDay = false }: TemperatureProps) => {
   }
 
   return (<div>
-    <div className="flex">
+    <div className="flex" style={style}>
       <span className={`${celsiusFontSize} font-bold leading-none`}>{celsius}</span>
       <span className="text-sm text-[#332821]">°C</span>
     </div>
-    <div className="text-sm text-[#332821] opacity-50">
-      {
-        showDay && (
-          <span>周日，</span>
-        )
-      }
-      11 am
-    </div>
+    { showTime && (
+      <div className="text-sm text-[#332821] opacity-50">
+        {
+          showDay && (
+            <span>周日，</span>
+          )
+        }
+        11 am
+      </div>)}
   </div>)
 }
 

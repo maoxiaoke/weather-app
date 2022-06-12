@@ -1,15 +1,24 @@
 import Head from 'next/head'
 import TodayHeader from '../components/TodayHeader';
+import SevenDayForcast from '../components/SevenDayForcast';
+import HourlyTabs from '../components/HourlyTabs';
 import { getCityName } from '../service/getCityName';
 import { getNowWeather } from '../service/getNowWeather';
+import { getSevenDaysWeather } from '../service/getSevenDaysWeather';
+import { getHourlyWeather } from '../service/getHourlyWeather';
 
 import type { NextPage, GetServerSideProps } from 'next';
 import type { CityInfo } from '../service/getCityName';
+import type { SevenDayForcastProps } from '../components/SevenDayForcast';
+import type { HourlyTabsProps } from '../components/HourlyTabs';
 import type { RealtimeWeather } from '../service/getNowWeather';
 import { useEffect } from 'react';
 
 const Forecast: NextPage<{
   cityInfo: CityInfo,
+  realtimeWeather: RealtimeWeather,
+  sevenDayForcasts: SevenDayForcastProps['forcasts'],
+  hourlyForcasts: HourlyTabsProps['forcasts']
 }> = (props) => {
   useEffect(() => {
     console.log('forsee')
@@ -23,6 +32,10 @@ const Forecast: NextPage<{
       </Head>
 
       <TodayHeader {...props} />
+
+      <HourlyTabs forcasts={props.hourlyForcasts} />
+
+      <SevenDayForcast forcasts={props.sevenDayForcasts} />
     </div>
   )
 }
@@ -34,12 +47,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { lat = '30.25', lon = '120.1552' } = context?.query ?? {};
 
   // @ts-ignore FIXME: types
-  const [cityInfo, realtimeWeather] = await Promise.all([getCityName(lat, lon), getNowWeather(lat, lon)]);
+  const [cityInfo, realtimeWeather, sevenDayForcasts] = await Promise.all([
+    getCityName(lat, lon),
+    getNowWeather(lat, lon),
+    getSevenDaysWeather(lat, lon),
+    getHourlyWeather(lat, lon),
+  ]);
 
   return {
     props: {
       cityInfo,
-      realtimeWeather
+      realtimeWeather,
+      sevenDayForcasts
     },
   }
 }

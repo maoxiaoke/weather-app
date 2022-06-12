@@ -4,9 +4,11 @@ import Temperature from './Temperature';
 import MeteorologyList from './MeteorologyList';
 
 import type { CityInfo } from '../service/getCityName';
+import type { RealtimeWeather } from '../service/getNowWeather';
 
-const TodayHeader = ({ cityInfo }: {
-  cityInfo: CityInfo
+const TodayHeader = ({ cityInfo, realtimeWeather }: {
+  cityInfo: CityInfo;
+  realtimeWeather: RealtimeWeather;
 }) => {
   return (
     <>
@@ -19,7 +21,7 @@ const TodayHeader = ({ cityInfo }: {
           <p className="font-bold text-3xl mt-[44px]">{cityInfo.city}，</p>
           <p className="font-bold text-3xl">{cityInfo.province}</p>
 
-          <Temperature type="lg" celsius="15" />
+          <Temperature type="lg" celsius={realtimeWeather.temp} />
         </div>
         <div className="mt-[39px]">
           <Image src="/assets/cloudy.png" width="100" height="100" alt="cloudy" />
@@ -29,20 +31,7 @@ const TodayHeader = ({ cityInfo }: {
       <div className="px-[22px]">
         <MeteorologyList
           type="horizen"
-          list={[
-            {
-              indicator: 'precipitation',
-              value: '6%'
-            },
-            {
-              indicator: 'humidity',
-              value: '90%'
-            },
-            {
-              indicator: 'windSpeed',
-              value: '19 km/h'
-            }
-          ]}
+          list={realtimeWeather.meteorologyList}
         />
       </div>
     </>
