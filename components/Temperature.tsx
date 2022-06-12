@@ -1,12 +1,16 @@
+import { getDays } from '../utils/getDays';
+import { getDuodecimalHour } from '../utils/getDuodecimalHour';
+
 export interface TemperatureProps {
   celsius: string;
   type?: 'xm' | 'sm' | 'md' | 'lg';
   showDay?: boolean;
   showTime?: boolean;
   style?: React.CSSProperties;
+  date?: string | Date;
 }
 
-const Temperature = ({ celsius, type, showDay = false, showTime = true, style }: TemperatureProps) => {
+const Temperature = ({ celsius, type, showDay = false, showTime = true, style, date }: TemperatureProps) => {
   let celsiusFontSize = 'text-[36px]';
 
   switch (type) {
@@ -31,11 +35,11 @@ const Temperature = ({ celsius, type, showDay = false, showTime = true, style }:
     { showTime && (
       <div className="text-sm text-[#332821] opacity-50">
         {
-          showDay && (
-            <span>周日，</span>
+          showDay && date && (
+            <span>{getDays(date)}，</span>
           )
         }
-        11 am
+        { date && getDuodecimalHour(date)}
       </div>)}
   </div>)
 }
