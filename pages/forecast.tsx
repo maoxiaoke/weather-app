@@ -6,10 +6,14 @@ import { getNowWeather } from '../service/getNowWeather';
 import type { NextPage, GetServerSideProps } from 'next';
 import type { CityInfo } from '../service/getCityName';
 import type { RealtimeWeather } from '../service/getNowWeather';
+import { useEffect } from 'react';
 
 const Forecast: NextPage<{
   cityInfo: CityInfo,
 }> = (props) => {
+  useEffect(() => {
+    console.log('forsee')
+  }, []);
   return (
     <div>
       <Head>

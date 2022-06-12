@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import type { SVGProps } from 'react';
 import Image from 'next/image';
+import { WindSpeedIcon, PrecipitationIcon, HumidityIcon } from './Svgs';
 
 export interface MeteorologyListProps {
   type?: "vertical" | 'horizen';
@@ -13,17 +15,20 @@ const indicatorMap = new Map([
   [
     'precipitation', {
       cn: '降水量',
-      icon: '/assets/precipitation.png',
+      defaultIcon: <PrecipitationIcon color='#FFF' />,
+      horizenIcon: <PrecipitationIcon color='#658ED9' />,
     }
   ],
   ['humidity', {
     cn: '湿度',
-    icon: '/assets/humidity.png',
+    defaultIcon: <HumidityIcon color='#FFF' />,
+    horizenIcon: <HumidityIcon color='#D86191' />
   }],
   [
     'windSpeed', {
       cn: '风速',
-      icon: '/assets/windSpeed.png',
+      defaultIcon: <WindSpeedIcon color='#FFF' />,
+      horizenIcon: <WindSpeedIcon color='#5E4FC1' />,
     }
   ]
 ])
@@ -36,8 +41,8 @@ const MeteorologyList = ({ type = 'vertical', list }: MeteorologyListProps) => {
           list.map((item, index) => (
             <li key={index} className="w-[160px] grid grid-cols-5">
               <span className="col-span-1 flex items-center h-full">
-                <span className="text-[0px] w-[18px] flex justify-center">
-                  <img src={indicatorMap.get(item.indicator)?.icon} alt={item.indicator} className="h-[18px]" />
+                <span className="text-[0px] w-[24px] h-[24px] flex justify-center">
+                  { indicatorMap.get(item.indicator)?.defaultIcon }
                 </span>
               </span>
               <span className="col-span-2">{indicatorMap.get(item.indicator)?.cn}</span>
@@ -57,7 +62,7 @@ const MeteorologyList = ({ type = 'vertical', list }: MeteorologyListProps) => {
             className={`rounded-[20px] flex items-center py-[5px] px-[15px]
             ${item.indicator === 'precipitation' ? 'bg-precipitation-rgba' : (item.indicator === 'humidity' ? 'bg-humidity-rgba' : 'bg-windSpeed-rgba')}`}
             >
-            <Image src={indicatorMap.get(item.indicator)!.icon} alt={item.indicator} width="24" height="24" />
+            { indicatorMap.get(item.indicator)?.horizenIcon }
             <span className={`${item.indicator === 'precipitation' ? 'text-precipitation' : (item.indicator === 'humidity' ? 'text-humidity' : 'text-windSpeed')}`}>{item.value}</span>
           </li>
         ))

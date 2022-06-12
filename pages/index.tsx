@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import toast, { Toaster } from 'react-hot-toast';
 import TodayCard from '../components/TodayCard';
-
 import { getCityName } from '../service/getCityName';
 import { getNowWeather } from '../service/getNowWeather';
 
@@ -41,7 +41,6 @@ const Home: NextPage<{
   realtimeWeather: RealtimeWeather
 }> = (props) => {
   const router = useRouter();
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchGeoLocation = async () => {
@@ -51,7 +50,7 @@ const Home: NextPage<{
 
         router.replace(`/?lat=${latitude}&log=${longitude}`)
       } catch (e) {
-        setError(e as Error);
+        toast((e as Error).message)
       }
     }
 
@@ -70,6 +69,7 @@ const Home: NextPage<{
         <div className="flex items-center justify-center h-full w-full">
           <TodayCard {...props} />
         </div>
+        <Toaster />
       </main>
     </div>
   )
