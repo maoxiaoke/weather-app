@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { lat = '30.25', lon = '120.1552' } = context?.query ?? {};
 
   // @ts-ignore FIXME: types
-  const [cityInfo, realtimeWeather, sevenDayForcasts] = await Promise.all([
+  const [cityInfo, realtimeWeather, sevenDayForcasts, hourlyForcasts] = await Promise.all([
     getCityName(lat, lon),
     getNowWeather(lat, lon),
     getSevenDaysWeather(lat, lon),
@@ -58,7 +58,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       cityInfo,
       realtimeWeather,
-      sevenDayForcasts
+      sevenDayForcasts,
+      hourlyForcasts,
     },
   }
 }
