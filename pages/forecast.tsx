@@ -44,9 +44,11 @@ export default Forecast;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Hangzhou as default
-  const { lat = '30.25', lon = '120.1552' } = context?.query ?? {};
+  const { lat = '30.25', lon = '120.1552' } = (context?.query ?? {}) as {
+    lat: string;
+    lon: string;
+  };
 
-  // @ts-ignore FIXME: types
   const [cityInfo, realtimeWeather, sevenDayForcasts, hourlyForcasts] = await Promise.all([
     getCityName(lat, lon),
     getNowWeather(lat, lon),

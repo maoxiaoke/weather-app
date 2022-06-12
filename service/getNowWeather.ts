@@ -5,7 +5,7 @@ export type RealtimeWeather = {
   meteorologyList: MeteorologyListProps['list'],
 }
 
-const getNowWeather = (lat: number, lon: number): Promise<RealtimeWeather> => {
+const getNowWeather = (lat: string, lon: string): Promise<RealtimeWeather> => {
   return fetch(`https://devapi.qweather.com/v7/weather/now?location=${lon},${lat}&key=${process.env.API_KEY}`).then(res => res.json())
     .then(json => {
       const { temp, windSpeed, humidity, precip } = json?.now ?? {};
