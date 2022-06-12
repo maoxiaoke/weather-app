@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { SVGProps } from 'react';
 import Image from 'next/image';
-import { WindSpeedIcon, PrecipitationIcon, HumidityIcon } from './Svgs';
+import { WindSpeedIcon, PrecipitationIcon, HumidityIcon } from './svgs';
 
 export interface MeteorologyListProps {
   type?: "vertical" | 'horizen';
