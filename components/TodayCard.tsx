@@ -3,17 +3,24 @@ import Image from 'next/image';
 import Temperature from './Temperature';
 import MeteorologyList from '../components/MeteorologyList';
 
-const TodayCard = () => {
+import type { CityInfo } from '../service/getCityName';
+import type { RealtimeWeather } from '../service/getNowWeather';
+
+const TodayCard = ({cityInfo, realtimeWeather } : {
+  cityInfo: CityInfo,
+  realtimeWeather: RealtimeWeather
+}) => {
+
   return (
     <div className="bg-white w-57.5 h-61.75 rounded-card relative">
       <div className="absolute top-0 translate-x-1/2 -translate-y-1/2">
         <Image src="/assets/cloudy.png" width="120" height="120" alt="cloudy" />
       </div>
 
-      <div className="mt-[79px] text-center font-bold text-xl">杭州市，浙江省</div>
+      <div className="mt-[79px] text-center font-bold text-xl">{cityInfo.city}，{cityInfo.province}</div>
 
       <div className="mt-[25px] px-[17px]">
-        <Temperature celsius="15" type="sm" />
+        <Temperature celsius={realtimeWeather.temp} type="sm" />
       </div>
 
       <Link href="/forecast">
@@ -28,20 +35,7 @@ const TodayCard = () => {
 
       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-[50px] text-white text-lg">
         <MeteorologyList
-          list={[
-            {
-              indicator: 'precipitation',
-              value: '6%'
-            },
-            {
-              indicator: 'humidity',
-              value: '90%'
-            },
-            {
-              indicator: 'windSpeed',
-              value: '19 km/h'
-            }
-          ]}
+          list={realtimeWeather.meteorologyList}
         />
       </div>
     </div>

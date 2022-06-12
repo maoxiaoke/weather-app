@@ -7,7 +7,7 @@ const getCityName = (lat: string, lon: string) => {
     const { adm2, adm1 } = json?.location[0] ?? {};
 
     return {
-      city: adm2,
+      city: adm2 + '市',
       province: adm1,
     }
   })

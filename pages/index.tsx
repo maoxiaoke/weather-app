@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import { useEffect, useState } from 'react';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import TodayCard from '../components/TodayCard';
 
 import { getCityName } from '../service/getCityName';
@@ -12,7 +13,10 @@ import type { RealtimeWeather } from '../service/getNowWeather';
 
 import styles from '../styles/Home.module.css'
 
-const getCurrentPosition = () => {
+const getCurrentPosition = (): Promise<{
+  latitude: number,
+  longitude: number,
+}> => {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -21,9 +25,14 @@ const getCurrentPosition = () => {
           latitude,
           longitude
         })
+      }, err => {
+        reject(err)
       })
     } else {
-      reject(false)
+      reject({
+        code: 404,
+        message: 'It\'s likely that your browser doesn\'t support Geolocation.'
+      })
     }
   })
 }
@@ -31,20 +40,22 @@ const getCurrentPosition = () => {
 const Home: NextPage<{
   cityInfo: CityInfo,
   realtimeWeather: RealtimeWeather
-}> = ({
-  cityInfo,
-  realtimeWeather,
-}) => {
+}> = (props) => {
+  const router = useRouter()
+  const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
-    const fetcha = async () => {
-      const position = await getCurrentPosition();
-      if (!position) {
+    const fetchGeoLocation = async () => {
+      try {
+        const position = await getCurrentPosition();
+        const { latitude, longitude } = position;
 
+        router.replace(`/?lat=${latitude}&log=${longitude}`)
+      } catch (e) {
+        setError(e as Error);
       }
-      // const { latitude, longitude } = position;
     }
 
-    fetcha();
+    fetchGeoLocation();
   }, [])
 
   return (
@@ -57,7 +68,7 @@ const Home: NextPage<{
 
       <main className={styles.background}>
         <div className="flex items-center justify-center h-full w-full">
-          <TodayCard />
+          <TodayCard {...props} />
         </div>
       </main>
     </div>
@@ -70,8 +81,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // Hangzhou as default
   const { lat = '30.25', lon = '120.1552' } = context?.query ?? {};
 
-  // @ts-ignore
-  const [cityInfo, realtimeWeather] =  Promise.all([getCityName(lat, lon), getNowWeather(lat, lon)]);
+  // @ts-ignore FIXME: types
+  const [cityInfo, realtimeWeather] = await Promise.all([getCityName(lat, lon), getNowWeather(lat, lon)]);
 
   return {
     props: {
