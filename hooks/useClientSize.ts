@@ -8,7 +8,6 @@ const useClientSize = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const handleSize = () => {
-      console.log('handle-size')
       setLoading(true);
 
       // This my not be right!!!

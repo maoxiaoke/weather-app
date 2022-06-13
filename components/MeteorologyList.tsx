@@ -63,7 +63,7 @@ const MeteorologyList = ({ type = 'vertical', list }: MeteorologyListProps) => {
             ${item.indicator === 'precipitation' ? 'bg-precipitation-rgba' : (item.indicator === 'humidity' ? 'bg-humidity-rgba' : 'bg-windSpeed-rgba')}`}
             >
             { indicatorMap.get(item.indicator)?.horizenIcon }
-            <span className={`${item.indicator === 'precipitation' ? 'text-precipitation' : (item.indicator === 'humidity' ? 'text-humidity' : 'text-windSpeed')}`}>{item.value}</span>
+            <span className={`${item.indicator === 'precipitation' ? 'text-precipitation' : (item.indicator === 'humidity' ? 'text-humidity' : 'text-windSpeed')} font-bold ml-[5px]`}>{item.value}</span>
           </li>
         ))
       }

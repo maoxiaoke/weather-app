@@ -1,5 +1,5 @@
-const getDuodecimalHour = (date: string | Date) => {
-  const hour = new Date(date.toString()).getHours();
+const getDuodecimalHour = (date: string | Date | number = Date.now()) => {
+  const hour = new Date(date).getHours();
 
   if (hour === 0) {
     return '12 pm';

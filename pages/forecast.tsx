@@ -12,7 +12,6 @@ import type { CityInfo } from '../service/getCityName';
 import type { SevenDayForcastProps } from '../components/SevenDayForcast';
 import type { HourlyTabsProps } from '../components/HourlyTabs';
 import type { RealtimeWeather } from '../service/getNowWeather';
-import { useEffect } from 'react';
 
 const Forecast: NextPage<{
   cityInfo: CityInfo,
@@ -20,9 +19,6 @@ const Forecast: NextPage<{
   sevenDayForcasts: SevenDayForcastProps['forcasts'],
   hourlyForcasts: HourlyTabsProps['forcasts']
 }> = (props) => {
-  useEffect(() => {
-    console.log('forsee')
-  }, []);
   return (
     <div>
       <Head>
@@ -35,7 +31,9 @@ const Forecast: NextPage<{
 
       <HourlyTabs forcasts={props.hourlyForcasts} />
 
-      <SevenDayForcast forcasts={props.sevenDayForcasts} />
+      <div className="mt-[-40px]">
+        <SevenDayForcast forcasts={props.sevenDayForcasts} />
+      </div>
     </div>
   )
 }

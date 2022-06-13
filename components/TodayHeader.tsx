@@ -20,16 +20,16 @@ const TodayHeader = ({ cityInfo, realtimeWeather }: {
           </Link>
 
           <p className="font-bold text-3xl mt-[44px]">{cityInfo.city}，</p>
-          <p className="font-bold text-3xl">{cityInfo.province}</p>
+          <p className="font-bold text-3xl mb-2">{cityInfo.province}</p>
 
-          <Temperature type="lg" celsius={realtimeWeather.temp} />
+          <Temperature type="lg" celsius={realtimeWeather.temp} showTime={false} />
         </div>
         <div className="mt-[39px]">
           <Image src={`/assets/${getDayOrNight()}-${realtimeWeather.status}.png`} width="100" height="100" alt="cloudy" />
         </div>
       </div>
 
-      <div className="px-[22px]">
+      <div className="px-[22px] mt-[10px]">
         <MeteorologyList
           type="horizen"
           list={realtimeWeather.meteorologyList}

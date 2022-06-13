@@ -6,40 +6,46 @@ export interface TemperatureProps {
   type?: 'xm' | 'sm' | 'md' | 'lg';
   showDay?: boolean;
   showTime?: boolean;
+  showHour?: boolean;
   style?: React.CSSProperties;
   date?: string | Date;
 }
 
-const Temperature = ({ celsius, type, showDay = false, showTime = true, style, date }: TemperatureProps) => {
+const Temperature = ({ celsius, type, showDay = true, showTime = true, style, date, showHour = true }: TemperatureProps) => {
   let celsiusFontSize = 'text-[36px]';
+  let centiFontSize = 'text-[13px]';
 
   switch (type) {
     case 'xm':
       celsiusFontSize = 'text-[18px]'
+      centiFontSize = 'text-[10px]';
       break;
     case 'md':
-        celsiusFontSize = 'text-[64px]'
+        celsiusFontSize = 'text-[64px]';
+        centiFontSize = 'text-[14px]';
       break;
     case 'lg':
-        celsiusFontSize = 'text-[96px]'
+        celsiusFontSize = 'text-[96px]';
+        centiFontSize = 'text-[24px]';
       break;
     default:
       break;
   }
 
+
   return (<div>
     <div className="flex" style={style}>
       <span className={`${celsiusFontSize} font-bold leading-none`}>{celsius}</span>
-      <span className="text-sm text-[#332821]">°C</span>
+      <span className={`${centiFontSize} text-sm text-[#332821] ${type==='lg' ? 'pt-[20px]' : ''}`}>°C</span>
     </div>
     { showTime && (
       <div className="text-sm text-[#332821] opacity-50">
         {
-          showDay && date && (
+          showDay && (
             <span>{getDays(date)}，</span>
           )
         }
-        { date && getDuodecimalHour(date)}
+        { showHour && getDuodecimalHour(date)}
       </div>)}
   </div>)
 }

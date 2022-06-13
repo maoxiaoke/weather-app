@@ -7,6 +7,7 @@ export type RealtimeWeather = {
   temp: string,
   status: WeatherStatus;
   meteorologyList: MeteorologyListProps['list'],
+  text?: string;
 }
 
 const getNowWeather = (lat: string, lon: string): Promise<RealtimeWeather> => {
@@ -17,6 +18,7 @@ const getNowWeather = (lat: string, lon: string): Promise<RealtimeWeather> => {
       return {
         temp,
         status: getWeatherStatus(text),
+        text,
         meteorologyList: [{
           indicator: 'precipitation',
           value: `${precip} mm`,

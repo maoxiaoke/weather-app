@@ -16,7 +16,6 @@ const TodayCard = ({cityInfo, realtimeWeather } : {
   const { lat = 30.25, log = 120.1552 } = router?.query || {};
 
   const routeToForcasePage = () => {
-    console.log('router---')
     router.push(`/forecast?lat=${lat}&log=${log}`)
   }
 
@@ -28,8 +27,9 @@ const TodayCard = ({cityInfo, realtimeWeather } : {
 
       <div className="mt-[79px] text-center font-bold text-xl">{cityInfo.city}，{cityInfo.province}</div>
 
-      <div className="mt-[25px] px-[17px]">
+      <div className="mt-[25px] px-[17px] flex items-center justify-between">
         <Temperature celsius={realtimeWeather.temp} type="sm" />
+        <div className="px-[26px] bg-[#D4426F] rounded-[20px] text-white opacity-50 text-[10px]"> { realtimeWeather.text } </div>
       </div>
 
       <div

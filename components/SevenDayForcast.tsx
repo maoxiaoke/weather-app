@@ -19,10 +19,10 @@ const SevenDayForcast = ({ forcasts }: SevenDayForcastProps) => {
       { forcasts.slice(1).map((forcast, index) => (
         <li className="grid grid-cols-3 pt-[14px] pb-[14px]" key={index}>
           <span className="text-lg font-bold flex items-center">{getDays(forcast.date)}</span>
-          <div>
+          <div className="text-center">
             <Image src={`/assets/${getDayOrNight()}-${forcast.status}.png`} alt="weather icon" width={50} height={50} />
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center justify-end">
             <Temperature type="xm" celsius={forcast.tempList[1]} showTime={false} />
             <div className="ml-[10px]" />
             <Temperature type="xm" celsius={forcast.tempList[0]} showTime={false} style={{ color: '#332821', opacity: '0.5' }} />
