@@ -1,24 +1,37 @@
 import { useState, useEffect } from 'react';
 
 const useClientSize = () => {
-  const [clientSize, setClientSize] = useState<Partial<Record<'width' | 'height', number>>>();
-
+  const [clientSize, setClientSize] = useState<Partial<Record<'width' | 'height', number>>>({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const handleSize = () => {
-      setClientSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
+      console.log('handle-size')
+      setLoading(true);
 
-      // Add "resize" listener
-      // FIXME: debounce this
-      window.addEventListener("resize", handleSize);
+      // This my not be right!!!
+      setTimeout(() => {
+        setClientSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+        setLoading(false)
+      }, 0)
 
-      return () => window.removeEventListener("resize", handleSize);
     }
+
+    // Add "resize" listener
+    // FIXME: debounce this
+    window.addEventListener("resize", handleSize);
+
+    return () => {
+      window.removeEventListener("resize", handleSize)
+    };
   }, []);
 
-  return clientSize;
+  return [clientSize, loading] as any;
 }
 
 export { useClientSize }
