@@ -1,7 +1,13 @@
+const withPWA = require('next-pwa');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  optimizeFonts: false,
-  reactStrictMode: true, // this will make page re-render
+  optimizeFonts: false, // Be careful, google font may be not fetched if `true`
+  reactStrictMode: true, // This will make page re-render
+
+  pwa: {
+    dest: 'public',
+  }
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)
