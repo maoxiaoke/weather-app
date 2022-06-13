@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
 import TodayCard from '../components/TodayCard';
+import Spark from '../components/Spark';
 import { getCityName } from '../service/getCityName';
 import { getNowWeather } from '../service/getNowWeather';
 
@@ -66,7 +68,11 @@ const Home: NextPage<{
       </Head>
 
       <main className={styles.background}>
-        <div className="flex items-center justify-center h-full w-full">
+        <div className="flex items-center justify-center h-full w-full relative">
+          <div className="absolute top-[49px] left-[16px]">
+            <Image src="/assets/applogo.svg" alt="logo" width={60} height={60} />
+          </div>
+          <Spark />
           <TodayCard {...props} />
         </div>
         <Toaster />
