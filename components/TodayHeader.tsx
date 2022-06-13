@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Temperature from './Temperature';
 import MeteorologyList from './MeteorologyList';
+import { getDayOrNight } from '../utils/getDayOrNight';
 
 import type { CityInfo } from '../service/getCityName';
 import type { RealtimeWeather } from '../service/getNowWeather';
@@ -24,7 +25,7 @@ const TodayHeader = ({ cityInfo, realtimeWeather }: {
           <Temperature type="lg" celsius={realtimeWeather.temp} />
         </div>
         <div className="mt-[39px]">
-          <Image src="/assets/cloudy.png" width="100" height="100" alt="cloudy" />
+          <Image src={`/assets/${getDayOrNight()}-${realtimeWeather.status}.png`} width="100" height="100" alt="cloudy" />
         </div>
       </div>
 
