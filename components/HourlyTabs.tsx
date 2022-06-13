@@ -1,7 +1,8 @@
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Temperature from '../components/Temperature';
 import { getDuodecimalHour } from '../utils/getDuodecimalHour';
+import { useClientSize } from '../hooks/useClientSize';
 
 const NoSSRComponent = dynamic(() => import("./TemperatureArea"), {
   ssr: false,
@@ -26,6 +27,8 @@ const getSlicedForcasts = (forcasts: HourlyTabsProps['forcasts'], idx: number) =
 }
 
 const HourlyTabs = ({ forcasts }: HourlyTabsProps) => {
+  const clientSize = useClientSize();
+
   const [chosen, setChosen ] = useState(forcasts[2].time.toString())
 
   const chosenIdx = forcasts.findIndex(forcast => forcast.time.toString() === chosen);
@@ -35,7 +38,7 @@ const HourlyTabs = ({ forcasts }: HourlyTabsProps) => {
     <div>
       <p className="ml-[20px] mt-[20px] ext-lg font-bold">Today</p>
 
-      <NoSSRComponent data={slicedForcasts} />
+      <NoSSRComponent data={slicedForcasts} width={clientSize?.width} />
 
       <ul className="flex justify-around opacity-50">
         {

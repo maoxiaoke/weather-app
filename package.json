@@ -13,7 +13,13 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-hot-toast": "^2.2.0",
-    "recharts": "^2.1.10"
+    "recharts": "^2.1.10",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "react-resize-detector": "^7.1.1"
+    }
   },
   "devDependencies": {
     "@types/node": "17.0.41",

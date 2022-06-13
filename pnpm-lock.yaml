@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  react-resize-detector: ^7.1.1
+
 specifiers:
   '@types/node': 17.0.41
   '@types/react': 18.0.12
@@ -13,6 +16,7 @@ specifiers:
   react-dom: 18.1.0
   react-hot-toast: ^2.2.0
   recharts: ^2.1.10
+  resize-observer-polyfill: ^1.5.1
   tailwindcss: ^3.1.1
   typescript: 4.7.3
 
@@ -22,6 +26,7 @@ dependencies:
   react-dom: 18.1.0_react@18.1.0
   react-hot-toast: 2.2.0_ef5jwxihqo6n7gxfmzogljlgcm
   recharts: 2.1.10_ef5jwxihqo6n7gxfmzogljlgcm
+  resize-observer-polyfill: 1.5.1
 
 devDependencies:
   '@types/node': 17.0.41
@@ -237,10 +242,6 @@ packages:
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
     dev: true
-
-  /@types/resize-observer-browser/0.1.7:
-    resolution: {integrity: sha512-G9eN0Sn0ii9PWQ3Vl72jDPgeJwRWhv2Qk/nQkJuWmRmOB4HX3/BhD5SE1dZs/hzPZL/WKnvF0RHdTSG54QJFyg==}
-    dev: false
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
@@ -1905,17 +1906,15 @@ packages:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: false
 
-  /react-resize-detector/6.7.8_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-0FaEcUBAbn+pq3PT5a9hHRebUfuS1SRLGLpIw8LydU7zX429I6XJgKerKAMPsJH0qWAl6o5bVKNqFJqr6tGPYw==}
+  /react-resize-detector/7.1.1_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-rU54VTstNzFLZAmMNHqt8xINjDWP7SQR05A2HUW0OGvl4vcrXzgaxrrqAY5tZMfkLkoYm5u0i0qGqCjdc2jyAA==}
     peerDependencies:
-      react: ^16.0.0 || ^17.0.0
-      react-dom: ^16.0.0 || ^17.0.0
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@types/resize-observer-browser': 0.1.7
       lodash: 4.17.21
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
-      resize-observer-polyfill: 1.5.1
     dev: false
 
   /react-smooth/2.0.0_ef5jwxihqo6n7gxfmzogljlgcm:
@@ -1987,7 +1986,7 @@ packages:
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-is: 16.13.1
-      react-resize-detector: 6.7.8_ef5jwxihqo6n7gxfmzogljlgcm
+      react-resize-detector: 7.1.1_ef5jwxihqo6n7gxfmzogljlgcm
       react-smooth: 2.0.0_ef5jwxihqo6n7gxfmzogljlgcm
       recharts-scale: 0.4.5
       reduce-css-calc: 2.1.8
