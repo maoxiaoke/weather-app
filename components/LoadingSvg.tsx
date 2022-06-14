@@ -1,4 +1,4 @@
-const LoadingSvg = () => {
+const LoadingSVG = () => {
   return (
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 17" fill="#FFF" color="#FFF" width="20" height="20">
@@ -10,4 +10,4 @@ const LoadingSvg = () => {
   )
 }
 
-export default LoadingSvg;
+export default LoadingSVG;

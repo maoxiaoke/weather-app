@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Temperature from './Temperature';
 import MeteorologyList from '../components/MeteorologyList';
-import LoadingSVG from '../components/LoadingSVG';
+import LoadingSVG from './LoadingSVG';
 import { getDayOrNight } from '../utils/getDayOrNight';
 
 import type { CityInfo } from '../service/getCityName';
