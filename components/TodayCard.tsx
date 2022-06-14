@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Temperature from './Temperature';
 import MeteorologyList from '../components/MeteorologyList';
+import LoadingSVG from '../components/LoadingSVG';
 import { getDayOrNight } from '../utils/getDayOrNight';
 
 import type { CityInfo } from '../service/getCityName';
@@ -12,9 +14,11 @@ const TodayCard = ({cityInfo, realtimeWeather } : {
   realtimeWeather: RealtimeWeather;
 }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { lat = 30.25, log = 120.1552 } = router?.query || {};
 
   const routeToForcasePage = () => {
+    setLoading(true);
     router.push(`/forecast?lat=${lat}&log=${log}`)
   }
 
@@ -36,7 +40,7 @@ const TodayCard = ({cityInfo, realtimeWeather } : {
         flex justify-center items-center rounded-button bg-[#5E4FC1] text-white text-bold text-sm`}
         onClick={() => routeToForcasePage()}
       >
-      详情
+      { loading ? <LoadingSVG /> : '详情' }
       </div>
 
 

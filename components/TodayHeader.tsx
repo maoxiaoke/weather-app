@@ -15,8 +15,10 @@ const TodayHeader = ({ cityInfo, realtimeWeather }: {
     <>
       <div className="flex pl-[22px] pr-[16px] w-full justify-between">
         <div className="mt-[69px]">
-          <Link href="/">
-            <Image src="/assets/left-arrow.png" width="20" height="17" alt="left arrow" />
+          <Link href="/" passHref>
+            <a>
+              <Image src="/assets/left-arrow.png" width="20" height="17" alt="left arrow" />
+            </a>
           </Link>
 
           <p className="font-bold text-3xl mt-[44px]">{cityInfo.city}，</p>
